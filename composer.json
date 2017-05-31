@@ -1,0 +1,22 @@
+{
+  "autoload": {
+    "psr-4": {
+      "DockerClient\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "name": "tranduykhanh/docker-php-client",
+  "authors": [
+    {
+      "name": "Tran Duy Khanh",
+      "email": "tran.duy.khanh@framgia.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.2",
+    "symfony/var-dumper": "^3.3",
+    "illuminate/support": "^5.4"
+  }
+}
