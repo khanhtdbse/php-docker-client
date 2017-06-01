@@ -22,9 +22,13 @@ class Image implements EntityManagerContract
     const SUCCESS_STATUS = [
         'build' => [200],
         'ls' => [200],
-//        'create' => [201],
-        'rm' => [204],
+        'rm' => [200],
     ];
+
+    const WARNING_STATUS = [
+
+    ];
+
     public $imageEntity;
 
     public static function ls(): ImageCollection

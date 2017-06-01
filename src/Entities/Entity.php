@@ -16,10 +16,10 @@ class Entity implements EntityContract
 {
     use HttpTrait;
 
-    protected $entityType;
-    protected $entityID;
-    protected $manager;
-    protected $attributes;
+    public $entityType;
+    public $entityID;
+    public $manager;
+    public $attributes;
 
     public function refresh()
     {

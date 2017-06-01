@@ -13,6 +13,7 @@ $testImageName = strtolower(str_random(10));
 switch ($argv[1]) {
     // List all containers
     case 'ls':
+        dd(Container::ls()->where('attributes.State.Pid', '2858'));
         break;
 
     // Create and start a new container
@@ -69,6 +70,11 @@ switch ($argv[1]) {
         $containerEntity->stop();
 
         echo $containerEntity->getEntityID();
+        break;
+
+
+    case 'test':
+        fwrite(STDOUT, "OK");
         break;
 }
 

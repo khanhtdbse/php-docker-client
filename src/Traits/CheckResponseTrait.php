@@ -22,7 +22,7 @@ trait CheckResponseTrait
             && !in_array($response->getStatusCode(), self::WARNING_STATUS[$method])
         ) {
             $data = json_decode($response->getBody());
-            throw new \Exception($data->message);
+            throw new \Exception($data->message??'');
         };
     }
 }
