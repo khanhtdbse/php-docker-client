@@ -8,7 +8,7 @@
 
 namespace DockerClient\Entities;
 
-use DockerClient\Image;
+use DockerClient\Transporters\Image;
 
 class ImageEntity extends Entity
 {

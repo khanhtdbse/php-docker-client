@@ -28,9 +28,7 @@ class Entity implements EntityContract
 
     public function getAttributes()
     {
-        $request = $this->http->request("GET", $this->getEntityType() . "/" . $this->getEntityID() . "/json");
-
-        $this->setAttributes(json_decode($request->getBody()->getContents(), true));
+        $this->setAttributes($this->inspect());
     }
 
     public function setAttributes($attributes)
@@ -69,7 +67,7 @@ class Entity implements EntityContract
         $managerName = $this->getManager();
         $managerInstance = new $managerName;
         $managerInstance->setEntity($this);
-        $managerInstance->$name($arguments);
+        return $managerInstance->$name($arguments);
     }
 
     public function getManager()

@@ -3,6 +3,8 @@ namespace DockerClient;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
+// Override laravel data_get for support get entity attributes
+
 function data_get($target, $key, $default = null)
 {
     if (is_null($key)) {
@@ -39,5 +41,3 @@ function data_get($target, $key, $default = null)
 
     return $target;
 }
-
-?>

@@ -6,7 +6,7 @@
  * Time: 13:25
  */
 
-namespace DockerClient;
+namespace DockerClient\Configs;
 
 abstract class Config
 {

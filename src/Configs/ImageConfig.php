@@ -6,7 +6,9 @@
  * Time: 13:25
  */
 
-namespace DockerClient;
+namespace DockerClient\Configs;
+
+use DockerClient\Exceptions\Images\Image400Exception;
 
 class ImageConfig extends Config
 {
@@ -28,8 +30,8 @@ class ImageConfig extends Config
 
         if (isset($configs['remote']) && false !== filter_var($configs['remote'], FILTER_VALIDATE_URL)) throw new \Exception("remote Dockerfile is not a valid URL");
 
-        if (!file_exists($compressedContextPath)) throw new \Exception("compressedContextPath does not exist");
-        if (!is_readable($compressedContextPath)) throw new \Exception("compressedContextPath is not readable");
+        if (!file_exists($compressedContextPath)) throw new Image400Exception("$compressedContextPath is not exist!", 400);
+        if (!is_readable($compressedContextPath)) throw new Image400Exception("$compressedContextPath is not readable!", 400);
 
         if (false === strpos($compressedContextPath, 'tar.bz2')
             && false === strpos($compressedContextPath, 'tar.gz')

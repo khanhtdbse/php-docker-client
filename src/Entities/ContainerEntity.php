@@ -9,7 +9,7 @@
 namespace DockerClient\Entities;
 
 
-use DockerClient\Container;
+use DockerClient\Transporters\Container;
 
 class ContainerEntity extends Entity
 {
@@ -26,6 +26,4 @@ class ContainerEntity extends Entity
         $this->setManager(Container::class);
         $this->getAttributes();
     }
-
-
 }

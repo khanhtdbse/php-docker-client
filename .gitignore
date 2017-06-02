@@ -2,3 +2,6 @@
 vendor
 reports
 composer.lock
+Test.php
+--debug/
+--verbose/

@@ -1,9 +1,9 @@
 <?php
-use DockerClient\Container;
-use DockerClient\ContainerConfig;
+use DockerClient\Transporters\Container;
+use DockerClient\Configs\ContainerConfig;
 use DockerClient\Entities\ContainerEntity;
-use DockerClient\Image;
-use DockerClient\ImageConfig;
+use DockerClient\Transporters\Image;
+use DockerClient\Configs\ImageConfig;
 
 require "vendor/autoload.php";
 
@@ -13,7 +13,7 @@ $testImageName = strtolower(str_random(10));
 switch ($argv[1]) {
     // List all containers
     case 'ls':
-        dd(Container::ls()->where('attributes.State.Pid', '2858'));
+        dd(Container::ls());
         break;
 
     // Create and start a new container
