@@ -20,22 +20,25 @@ class BaseTestCase extends TestCase
     public static function tearDownAfterClass()
     {
         self::println("--- Start clear containers: ");
-        array_walk(self::$testContainerName, function ($containerName) {
+        array_walk(self::$testContainerName, function ($containerName, $index) {
             $containerEntity = new ContainerEntity($containerName);
             $containerEntity->stop();
             $containerEntity->rm();
+            unset(self::$testContainerName[$index]);
         });
 
         self::println("--- Start clear images: ");
-        array_walk(self::$testImageName, function ($imageName) {
+        array_walk(self::$testImageName, function ($imageName, $index) {
             $imageEntity = new ImageEntity($imageName);
             $imageEntity->rm();
+            unset(self::$testImageName[$index]);
         });
 
         self::println("--- Start clear volumes: ");
-        array_walk(self::$testVolumeName, function ($imageName) {
-            $imageEntity = new VolumeEntity($imageName);
-            $imageEntity->rm();
+        array_walk(self::$testVolumeName, function ($volumeName, $index) {
+            $volumeEntity = new VolumeEntity($volumeName);
+            $volumeEntity->rm();
+            unset(self::$testVolumeName[$index]);
         });
     }
 
@@ -65,5 +68,11 @@ class BaseTestCase extends TestCase
 
     private static function println($str){
         echo "\n$str\n";
+    }
+
+    protected static function removeEntityByValue(&$entity, $value){
+        if (($key = array_search($value, $entity)) !== false) {
+            unset($entity[$key]);
+        }
     }
 }

@@ -30,8 +30,6 @@ class ExecTest extends BaseTestCase
         ]);
         $result = $container->exec($execConfig);
 
-        dd(self::$testVolumeName,self::$testContainerName,self::$testImageName);
-
-        $this->assertEquals('hellotest', $result);
+        $this->assertInternalType('string', $result);
     }
 }

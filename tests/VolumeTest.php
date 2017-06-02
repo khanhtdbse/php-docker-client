@@ -31,15 +31,14 @@ class VolumeTest extends BaseTestCase
 
         $this->assertTrue(true);
 
-        return $volume;
+        return $volume->getEntity();
     }
 
     /**
      * @depends testCreateNewVolume
      */
-    public function testInspectVolume()
+    public function testInspectVolume(VolumeEntity $volumeEntity)
     {
-        $volumeEntity = new VolumeEntity(self::$testVolumeName[0]);
         $result = $volumeEntity->inspect();
 
         $this->assertTrue(is_array($result));
@@ -47,12 +46,13 @@ class VolumeTest extends BaseTestCase
 
     /**
      * @depends testCreateNewVolume
-     * @expectedException \DockerClient\Exceptions\Volumes\Exec404Exception
+     * @expectedException \DockerClient\Exceptions\Volumes\Volume404Exception
      */
-    public function testRemoveVolume()
+    public function testRemoveVolume(VolumeEntity $volumeEntity)
     {
-        $volumeEntity = new VolumeEntity(self::$testVolumeName[0]);
         $volumeEntity->rm();
+
+        $this->removeEntityByValue(self::$testVolumeName, $volumeEntity->getEntityID());
 
         $volumeEntity->inspect();
 
@@ -60,7 +60,7 @@ class VolumeTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \DockerClient\Exceptions\Volumes\Exec404Exception
+     * @expectedException \DockerClient\Exceptions\Volumes\Volume404Exception
      */
     public function test404Exception()
     {

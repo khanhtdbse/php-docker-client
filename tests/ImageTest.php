@@ -5,13 +5,13 @@
  * Date: 01/06/2017
  * Time: 07:56
  */
+
 namespace DockerClient\Tests;
 
 use DockerClient\Collections\ImageCollection;
 use DockerClient\Configs\ImageConfig;
 use DockerClient\Entities\ImageEntity;
 use DockerClient\Transporters\Image;
-use PHPUnit\Framework\TestCase;
 
 class ImageTest extends BaseTestCase
 {
@@ -28,7 +28,7 @@ class ImageTest extends BaseTestCase
 
         $image = new Image();
         $imageConfig = new ImageConfig('compressWithDockerfile.tar.bz2', [
-            't' => $imageName,
+            't'  => $imageName,
             'rm' => false
         ]);
         $image->build($imageConfig);
@@ -53,27 +53,30 @@ class ImageTest extends BaseTestCase
     public function testRemoveImage(ImageEntity $imageEntity)
     {
         $imageEntity->rm();
+        $this->removeEntityByValue(self::$testImageName, $imageEntity->getEntityID());
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \DockerClient\Exceptions\Images\Image404Exception
      */
-    public function test404Exception(){
-        $imageEntity = new ImageEntity(rand(999,99999));
+    public function test404Exception()
+    {
+        $imageEntity = new ImageEntity(rand(999, 99999));
         $imageEntity->inspect();
     }
 
     /**
      * @expectedException \DockerClient\Exceptions\Images\Image400Exception
      */
-    public function test400Exception(){
-        $imageName = $imageName??$this->getRandomImageName();
+    public function test400Exception()
+    {
+        $imageName = "thisisalwaysfailimage";
 
         $image = new Image();
         $imageConfig = new ImageConfig('compressWithDocdkerfile.tar.bz2', [
-            't' => $imageName,
-            'r-m' => "failvalue",
+            't'     => $imageName,
+            'r-m'   => "failvalue",
             '??r-m' => "failvalue"
         ]);
         $image->build($imageConfig);
