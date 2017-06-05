@@ -16,6 +16,7 @@
     }
   ],
   "require": {
+    "php": "^7.1",
     "guzzlehttp/guzzle": "^6.0",
     "symfony/var-dumper": "^3.3",
     "illuminate/support": "^5.4",
